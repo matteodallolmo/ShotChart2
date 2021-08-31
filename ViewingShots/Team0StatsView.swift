@@ -14,7 +14,7 @@ struct Team0StatsView: View {
     var team: String
     
     @State private var totalShots = 0
-    @State private var criteria1 = "Position"
+    @State private var criteria1 = ""
     @State private var phase = 1
     
     @State private var one = [Shot]()
