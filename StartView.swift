@@ -19,7 +19,7 @@ struct StartView: View {
             NavigationView {
                 VStack {
                     
-                    Text("ShotChart")
+                    Text("HW Water Polo")
                         .fontWeight(.bold)
                         .font(.largeTitle)
                     
@@ -56,11 +56,11 @@ struct StartView: View {
                         
                         Button(action: {
                             
-                            if(password == "Wolverine1")
+                            if(password == "Player1")
                             {
                                 self.isActive = true
                             }
-                            else if(password == "")
+                            else if(password == "Admin1")
                             {
                                 self.isActive = true
                                 self.admin = true

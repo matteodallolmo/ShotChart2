@@ -34,15 +34,7 @@ VStack {
                 Text("Loyola").tag("Loyola")
                 Text("Newport").tag("Newport")
                 Text("JSerra").tag("JSerra")
-                Text("Olu").tag("Olu")
-                Group {
-                Text("Mira Costa").tag("Mira Costa")
-                Text("Campolindo").tag("Campolindo")
-                Text("Sacred Heart").tag("Sacred Heart")
-                Text("Cathedral Catholic").tag("Cathedral Catholic")
-                Text("Miramonte").tag("Miramonte")
-                Text("Bishops").tag("Bishops")
-                }
+                Text("Oaks Christian").tag("Oaks Christian")
             })
         }
         
