@@ -20,7 +20,7 @@ struct LogShotsView: View {
     @State private var backButton = false
     @State private var errorMes = ""
     
-    @State private var shotTypeListArr: [String] = [ "Direct", "Catch & Shoot", "Fake", "Drive", "Pick Up", "Backhand", "Quick 6v5", "Over Pass", "Lob", "Transition" ]
+    @State private var shotTypeListArr: [String] = [ "Direct", "Catch & Shoot", "Fake", "Drive", "Pick Up", "Backhand", "Quick 6v5", "Over Pass", "Skip", "Lob", "Transition" ]
     @State private var selections: [String] = [];
     
     var body: some View {
@@ -75,7 +75,7 @@ VStack {
         Button(action: {
             
         for item in selections {
-            shotType.append(shotTypeListArr.firstIndex(of: item)!)
+            shotType.append(shotTypeListArr.firstIndex(of: item)!+1)
         }
         if(self.validateFields() == nil)
         {

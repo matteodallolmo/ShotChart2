@@ -13,7 +13,6 @@ struct Team0StatsView: View {
     
     var team: String
     
-    @State private var totalShots = 0
     @State private var criteria1 = ""
     @State private var phase = 1
     
@@ -80,8 +79,6 @@ ScrollView {
 if(criteria1 == "Position" && phase == 1) {
 VStack(spacing: 10) {
     
-    Text("Total Shots: "+String(totalShots))
-    
     NavigationLink(
         destination: Team1StatsView(team: team, criteria1: KeyValue(key: criteria1, value: 1), shotSelection: one, phase: 1),
         label: {
@@ -122,8 +119,6 @@ VStack(spacing: 10) {
 else if(criteria1 == "Position" && phase == 2)
 {
 VStack(spacing: 10) {
-    
-    Text("Total Shots: "+String(totalShots))
         
     NavigationLink(
         destination: Team1StatsView(team: team, criteria1: KeyValue(key: criteria1, value: 1), shotSelection: oneUP, phase: 2),
@@ -167,7 +162,6 @@ if(criteria1 == "Type") {
 VStack(spacing: 10) {
     
     Group {
-    Text("Total Shots: "+String(totalShots))
         
     NavigationLink(
         destination: Team1StatsView(team: team, criteria1: KeyValue(key: criteria1, value: 1), shotSelection: direct, phase: 1),
@@ -238,9 +232,7 @@ VStack(spacing: 10) {
 }//if criteria1
 if(criteria1 == "Location") {
 VStack(spacing: 10) {
-    
-    Text("Total Shots: "+String(totalShots))
-        
+            
     NavigationLink(
         destination: Team1StatsView(team: team, criteria1: KeyValue(key: criteria1, value: 1), shotSelection: oneLoc, phase: 1),
         label: {
@@ -328,8 +320,6 @@ func retrieveCriteria(team: String, criteria: String) -> Void
         }
         }
     }//for end
-        
-        totalShots = one.count+two.count+three.count+four.count+five.count+six.count
     }//if end
     
     else {
@@ -376,8 +366,6 @@ func retrieveCriteria(team: String, criteria: String) -> Void
         }
     }
     }//for end
-        
-        totalShots = oneUP.count+twoUP.count+threeUP.count+fourUP.count+fiveUP.count+sixUP.count
     }//else end
         
     }//if end
@@ -447,8 +435,6 @@ func retrieveCriteria(team: String, criteria: String) -> Void
         }
         }
     }//for end
-        
-        totalShots = direct.count+cas.count+fake.count+drive.count+pickup.count+backhand.count+quick6v5.count+overpass.count+skip.count+lob.count+transition.count
     }//if end
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -491,9 +477,6 @@ func retrieveCriteria(team: String, criteria: String) -> Void
         }
         }
     }//for end
-        
-    totalShots = oneLoc.count+twoLoc.count+threeLoc.count+fourLoc.count+fiveLoc.count
-
     }//if end
 }//func end
 }//struct

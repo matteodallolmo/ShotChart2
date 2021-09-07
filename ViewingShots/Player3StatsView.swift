@@ -16,9 +16,7 @@ struct Player3StatsView: View {
     var criteria3: KeyValue
     var shotSelection: [Shot]
     @State var phase: Int
-    
-    @State private var totalShots = 0
-    
+        
     var title1: String {
         if(criteria1.key == "Type" && criteria1.value == 1)
         {

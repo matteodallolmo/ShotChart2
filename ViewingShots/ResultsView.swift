@@ -25,12 +25,18 @@ struct TeamResultsTable: View {
         
         return (goals/shots)*100
     }
+    
+    
     @State private var goal = [Shot]()
     @State private var fieldBlock = [Shot]()
     @State private var missGoal = [Shot]()
     @State private var tipOut = [Shot]()
     @State private var goalieBlock = [Shot]()
     @State private var beatFB = [Shot]()
+    
+    var shots: Int {
+        return goal.count+fieldBlock.count+missGoal.count+tipOut.count+goalieBlock.count+beatFB.count
+    }
     
     var body: some View {
         
@@ -40,6 +46,7 @@ struct TeamResultsTable: View {
                 .font(.title)
                 .padding(.top)
             
+            Text("Shots Taken:" + String(shots))
             Text("Shooting Percentage: "+String(shootingPercentage.rounded())+"%")
             
             ResultStatView(num: 1, shotsTaken: goal.count)
@@ -535,12 +542,17 @@ struct PlayerResultsTable: View {
         
         return (goals/shots)*100
     }
+    
     @State private var goal = [Shot]()
     @State private var fieldBlock = [Shot]()
     @State private var missGoal = [Shot]()
     @State private var tipOut = [Shot]()
     @State private var goalieBlock = [Shot]()
     @State private var beatFB = [Shot]()
+    
+    var shots: Int {
+        return goal.count+fieldBlock.count+missGoal.count+tipOut.count+goalieBlock.count+beatFB.count
+    }
     
     var body: some View {
         
@@ -550,6 +562,7 @@ struct PlayerResultsTable: View {
                 .font(.title)
                 .padding(.top)
             
+            Text("Shots Taken: " + String(shots))
             Text("Shooting Percentage: "+String(shootingPercentage.rounded())+"%")
             
             ResultStatView(num: 1, shotsTaken: goal.count)

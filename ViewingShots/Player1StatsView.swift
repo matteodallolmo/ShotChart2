@@ -15,7 +15,6 @@ struct Player1StatsView: View {
     var shotSelection: [Shot]
     @State var phase: Int
     
-    @State private var totalShots = 0
     @State private var criteria2 = "None"
     
     @State private var one = [Shot]()
@@ -153,9 +152,7 @@ VStack {
     ScrollView {
     if(criteria2 == "Position" && phase == 1) {
     VStack(spacing: 10) {
-        
-        Text("Total Shots: "+String(totalShots))
-        
+                
         NavigationLink(
             destination: Player2StatsView(team: team, num: num, criteria1: criteria1, criteria2: KeyValue(key: criteria2, value: 1), shotSelection: one, phase: 1),
             label: {
@@ -196,9 +193,7 @@ VStack {
     else if(criteria2 == "Position" && phase == 2)
     {
     VStack(spacing: 10) {
-        
-        Text("Total Shots: "+String(totalShots))
-            
+                    
         NavigationLink(
             destination: Player2StatsView(team: team, num: num, criteria1: criteria1, criteria2: KeyValue(key: criteria2, value: 1), shotSelection: oneUP, phase: 2),
             label: {
@@ -241,8 +236,6 @@ VStack {
     VStack(spacing: 10) {
         
         Group {
-        Text("Total Shots: "+String(totalShots))
-            
         NavigationLink(
             destination: Player2StatsView(team: team, num: num, criteria1: criteria1, criteria2: KeyValue(key: criteria2, value: 1), shotSelection: direct, phase: 1),
             label: {
@@ -312,9 +305,7 @@ VStack {
     }//if criteria1
     if(criteria2 == "Location") {
     VStack(spacing: 10) {
-        
-        Text("Total Shots: "+String(totalShots))
-            
+                    
         NavigationLink(
             destination: Player2StatsView(team: team, num: num, criteria1: criteria1, criteria2: KeyValue(key: criteria2, value: 1), shotSelection: oneLoc, phase: 1),
             label: {
@@ -385,7 +376,6 @@ func loadData() -> Void {
                 return false }))
             { six.append(shot) }
         }
-        totalShots = one.count+two.count+three.count+four.count+five.count+six.count
     }//if end
     else if(criteria2 == "Position" && phase == 2)
     {
@@ -416,7 +406,6 @@ func loadData() -> Void {
                 return false }))
             { sixUP.append(shot) }
         }
-        totalShots = oneUP.count+twoUP.count+threeUP.count+fourUP.count+fiveUP.count+sixUP.count
     }//else if end
     else if(criteria2 == "Type")
     {
@@ -467,7 +456,6 @@ func loadData() -> Void {
                 return false }))
             { transition.append(shot) }
         }
-        totalShots = direct.count+cas.count+fake.count+drive.count+pickup.count+backhand.count+quick6v5.count+overpass.count+skip.count+lob.count+transition.count
     }//else if end
     else if(criteria2 == "Location")
     {
@@ -494,7 +482,6 @@ func loadData() -> Void {
                 return false }))
             { fiveLoc.append(shot) }
         }
-        totalShots = oneLoc.count+twoLoc.count+threeLoc.count+fourLoc.count+fiveLoc.count
     }//else if end
 }//func end
     
