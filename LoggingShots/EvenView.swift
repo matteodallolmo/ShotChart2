@@ -13,7 +13,7 @@ struct EvenView: View {
     
     var teamname = ""
     var strCapNum = ""
-    var shotType = 0
+    var shotType = [Int]()
     var shotResult = 0
     var phase = 0
     var location = 0
@@ -157,7 +157,7 @@ func updateToFirebase() -> Void
 
 struct EvenView_Previews: PreviewProvider {
     static var previews: some View {
-        EvenView(teamname: "Harvard-Westlake", strCapNum: "3", shotType: 3, shotResult: 4, phase: 1, location: 4)
+        EvenView(teamname: "Harvard-Westlake", strCapNum: "3", shotType: [3, 2, 1], shotResult: 4, phase: 1, location: 4)
             .previewLayout(.fixed(width: 2532, height: 1170))
     }
 }

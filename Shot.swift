@@ -14,7 +14,7 @@ struct Shot {
     var phase: Int
     var result: Int
     var source: Int
-    var type: Int
+    var type: [Int]
     
     init(doc: QueryDocumentSnapshot) {
         
@@ -24,7 +24,7 @@ struct Shot {
         phase = dict["Phase"] as! Int
         result = dict["Result"] as! Int
         source = dict["Position"] as! Int
-        type = dict["Type"] as! Int
+        type = dict["Type"] as! [Int]
     }
     
     func equals(temp: Shot) -> Bool

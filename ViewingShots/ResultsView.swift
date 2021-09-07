@@ -70,10 +70,13 @@ struct TeamResultsTable: View {
                 if(criteria3 != nil)
                 {
                     for n in 1...6 {
+                        
+                    if(criteria1!.key == "Type") {
+                        
                         db.collectionGroup(team+"Shots")
                             .whereField("Result", isEqualTo: n)
                             .whereField("Phase", isEqualTo: phase)
-                            .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                            .whereField("Type", arrayContains: criteria1!.value)
                             .whereField(criteria2!.key, isEqualTo: criteria2!.value)
                             .whereField(criteria3!.key, isEqualTo: criteria3!.value).getDocuments { snapshot, error in
                     
@@ -114,18 +117,16 @@ struct TeamResultsTable: View {
                         print("THE ERROR WAS: "+error!.localizedDescription)
                     }
                 }
-                        
-                }//for end
+                     
+                }//if end
+                else if(criteria2!.key == "Type") {
                     
-                return
-                }//criteria3
-                
-                for n in 1...6 {
                     db.collectionGroup(team+"Shots")
                         .whereField("Result", isEqualTo: n)
                         .whereField("Phase", isEqualTo: phase)
                         .whereField(criteria1!.key, isEqualTo: criteria1!.value)
-                        .whereField(criteria2!.key, isEqualTo: criteria2!.value).getDocuments { snapshot, error in
+                        .whereField(criteria2!.key, arrayContains: criteria2!.value)
+                        .whereField(criteria3!.key, isEqualTo: criteria3!.value).getDocuments { snapshot, error in
                 
                 if snapshot != nil
                 {
@@ -164,6 +165,207 @@ struct TeamResultsTable: View {
                     print("THE ERROR WAS: "+error!.localizedDescription)
                 }
             }
+                 
+            }//else if end
+                        
+            else if(criteria3!.key == "Type") {
+                
+                db.collectionGroup(team+"Shots")
+                    .whereField("Result", isEqualTo: n)
+                    .whereField("Phase", isEqualTo: phase)
+                    .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                    .whereField(criteria2!.key, isEqualTo: criteria2!.value)
+                    .whereField(criteria3!.key, arrayContains: criteria3!.value).getDocuments { snapshot, error in
+            
+            if snapshot != nil
+            {
+                for doc in snapshot!.documents {
+                    
+                    let shot = Shot(doc: doc)
+                    
+                    if(n == 1 && !self.goal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goal.append(shot) }
+                    if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.fieldBlock.append(shot) }
+                    if(n == 3 && !self.missGoal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.missGoal.append(shot) }
+                    if(n == 4 && !self.tipOut.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.tipOut.append(shot) }
+                    if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goalieBlock.append(shot) }
+                    if(n == 6 && !self.beatFB.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.beatFB.append(shot) }
+                }
+            }
+            else
+            {
+                print("THE ERROR WAS: "+error!.localizedDescription)
+            }
+        }
+             
+        }//else if end
+                
+        }//for end
+                
+                    
+        return
+        }//criteria3
+                
+                for n in 1...6 {
+                    
+                    
+                    if(criteria1!.key == "Type") {
+                        
+                        db.collectionGroup(team+"Shots")
+                            .whereField("Result", isEqualTo: n)
+                            .whereField("Phase", isEqualTo: phase)
+                            .whereField("Type", arrayContains: criteria1!.value)
+                            .whereField(criteria2!.key, isEqualTo: criteria2!.value).getDocuments { snapshot, error in
+                    
+                    if snapshot != nil
+                    {
+                        for doc in snapshot!.documents {
+                            
+                            let shot = Shot(doc: doc)
+                            
+                            if(n == 1 && !self.goal.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.goal.append(shot) }
+                            if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.fieldBlock.append(shot) }
+                            if(n == 3 && !self.missGoal.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.missGoal.append(shot) }
+                            if(n == 4 && !self.tipOut.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.tipOut.append(shot) }
+                            if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.goalieBlock.append(shot) }
+                            if(n == 6 && !self.beatFB.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.beatFB.append(shot) }
+                        }
+                    }
+                    else
+                    {
+                        print("THE ERROR WAS: "+error!.localizedDescription)
+                    }
+                }
+                     
+                }//if end
+                else if(criteria2!.key == "Type") {
+                    
+                    db.collectionGroup(team+"Shots")
+                        .whereField("Result", isEqualTo: n)
+                        .whereField("Phase", isEqualTo: phase)
+                        .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                        .whereField("Type", arrayContains: criteria2!.value).getDocuments { snapshot, error in
+                
+                if snapshot != nil
+                {
+                    for doc in snapshot!.documents {
+                        
+                        let shot = Shot(doc: doc)
+                        
+                        if(n == 1 && !self.goal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goal.append(shot) }
+                        if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.fieldBlock.append(shot) }
+                        if(n == 3 && !self.missGoal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.missGoal.append(shot) }
+                        if(n == 4 && !self.tipOut.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.tipOut.append(shot) }
+                        if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goalieBlock.append(shot) }
+                        if(n == 6 && !self.beatFB.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.beatFB.append(shot) }
+                    }
+                }
+                else
+                {
+                    print("THE ERROR WAS: "+error!.localizedDescription)
+                }
+            }
+                 
+            }//else if end
+            else
+            {
+                db.collectionGroup(team+"Shots")
+                    .whereField("Result", isEqualTo: n)
+                    .whereField("Phase", isEqualTo: phase)
+                    .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                    .whereField(criteria2!.key, isEqualTo: criteria2!.value).getDocuments { snapshot, error in
+            
+            if snapshot != nil
+            {
+                for doc in snapshot!.documents {
+                    
+                    let shot = Shot(doc: doc)
+                    
+                    if(n == 1 && !self.goal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goal.append(shot) }
+                    if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.fieldBlock.append(shot) }
+                    if(n == 3 && !self.missGoal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.missGoal.append(shot) }
+                    if(n == 4 && !self.tipOut.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.tipOut.append(shot) }
+                    if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goalieBlock.append(shot) }
+                    if(n == 6 && !self.beatFB.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.beatFB.append(shot) }
+                }
+            }
+            else
+            {
+                print("THE ERROR WAS: "+error!.localizedDescription)
+            }
+                }//snapshot end
+            }//else end
                     
             }//for end
                 
@@ -171,6 +373,54 @@ struct TeamResultsTable: View {
             }//criteria2
             
             for n in 1...6 {
+                
+                if(criteria1!.key == "Type") {
+                
+                db.collectionGroup(team+"Shots")
+                    .whereField("Result", isEqualTo: n)
+                    .whereField("Phase", isEqualTo: phase)
+                    .whereField(criteria1!.key, arrayContains: criteria1!.value).getDocuments { snapshot, error in
+                
+                if snapshot != nil
+                {
+                    for doc in snapshot!.documents {
+                        
+                        let shot = Shot(doc: doc)
+                        
+                        if(n == 1 && !self.goal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goal.append(shot) }
+                        if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.fieldBlock.append(shot) }
+                        if(n == 3 && !self.missGoal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.missGoal.append(shot) }
+                        if(n == 4 && !self.tipOut.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.tipOut.append(shot) }
+                        if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goalieBlock.append(shot) }
+                        if(n == 6 && !self.beatFB.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.beatFB.append(shot) }
+                    }
+                }
+                else
+                {
+                    print("THE ERROR WAS: "+error!.localizedDescription)
+                }
+            }
+            }
+                
+            else {
                 db.collectionGroup(team+"Shots")
                     .whereField("Result", isEqualTo: n)
                     .whereField("Phase", isEqualTo: phase)
@@ -213,7 +463,7 @@ struct TeamResultsTable: View {
                     print("THE ERROR WAS: "+error!.localizedDescription)
                 }
             }
-                
+            }
             }//for end
             
             return
@@ -266,12 +516,6 @@ struct TeamResultsTable: View {
         
     }//func end
 }//struct end
-
-
-
-
-
-
 
 
 struct PlayerResultsTable: View {
@@ -336,10 +580,13 @@ struct PlayerResultsTable: View {
                 if(criteria3 != nil)
                 {
                     for n in 1...6 {
-                    db.collection("teams").document(team).collection("players").document(String(num)).collection(team+"Shots")
+                        
+                    if(criteria1!.key == "Type") {
+                        
+                        db.collection("teams").document(team).collection("players").document(String(num)).collection(team+"Shots")
                             .whereField("Result", isEqualTo: n)
                             .whereField("Phase", isEqualTo: phase)
-                            .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                            .whereField("Type", arrayContains: criteria1!.value)
                             .whereField(criteria2!.key, isEqualTo: criteria2!.value)
                             .whereField(criteria3!.key, isEqualTo: criteria3!.value).getDocuments { snapshot, error in
                     
@@ -380,18 +627,16 @@ struct PlayerResultsTable: View {
                         print("THE ERROR WAS: "+error!.localizedDescription)
                     }
                 }
-                        
-                }//for end
+                     
+                }//if end
+                else if(criteria2!.key == "Type") {
                     
-                return
-                }//criteria3
-                
-                for n in 1...6 {
-                db.collection("teams").document(team).collection("players").document(String(num)).collection(team+"Shots")
+                    db.collectionGroup(team+"Shots")
                         .whereField("Result", isEqualTo: n)
                         .whereField("Phase", isEqualTo: phase)
                         .whereField(criteria1!.key, isEqualTo: criteria1!.value)
-                        .whereField(criteria2!.key, isEqualTo: criteria2!.value).getDocuments { snapshot, error in
+                        .whereField(criteria2!.key, arrayContains: criteria2!.value)
+                        .whereField(criteria3!.key, isEqualTo: criteria3!.value).getDocuments { snapshot, error in
                 
                 if snapshot != nil
                 {
@@ -430,6 +675,207 @@ struct PlayerResultsTable: View {
                     print("THE ERROR WAS: "+error!.localizedDescription)
                 }
             }
+                 
+            }//else if end
+                        
+            else if(criteria3!.key == "Type") {
+                
+                db.collectionGroup(team+"Shots")
+                    .whereField("Result", isEqualTo: n)
+                    .whereField("Phase", isEqualTo: phase)
+                    .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                    .whereField(criteria2!.key, isEqualTo: criteria2!.value)
+                    .whereField(criteria3!.key, arrayContains: criteria3!.value).getDocuments { snapshot, error in
+            
+            if snapshot != nil
+            {
+                for doc in snapshot!.documents {
+                    
+                    let shot = Shot(doc: doc)
+                    
+                    if(n == 1 && !self.goal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goal.append(shot) }
+                    if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.fieldBlock.append(shot) }
+                    if(n == 3 && !self.missGoal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.missGoal.append(shot) }
+                    if(n == 4 && !self.tipOut.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.tipOut.append(shot) }
+                    if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goalieBlock.append(shot) }
+                    if(n == 6 && !self.beatFB.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.beatFB.append(shot) }
+                }
+            }
+            else
+            {
+                print("THE ERROR WAS: "+error!.localizedDescription)
+            }
+        }
+             
+        }//else if end
+                
+        }//for end
+                
+                    
+        return
+        }//criteria3
+                
+                for n in 1...6 {
+                    
+                    
+                    if(criteria1!.key == "Type") {
+                        
+                        db.collectionGroup(team+"Shots")
+                            .whereField("Result", isEqualTo: n)
+                            .whereField("Phase", isEqualTo: phase)
+                            .whereField("Type", arrayContains: criteria1!.value)
+                            .whereField(criteria2!.key, isEqualTo: criteria2!.value).getDocuments { snapshot, error in
+                    
+                    if snapshot != nil
+                    {
+                        for doc in snapshot!.documents {
+                            
+                            let shot = Shot(doc: doc)
+                            
+                            if(n == 1 && !self.goal.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.goal.append(shot) }
+                            if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.fieldBlock.append(shot) }
+                            if(n == 3 && !self.missGoal.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.missGoal.append(shot) }
+                            if(n == 4 && !self.tipOut.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.tipOut.append(shot) }
+                            if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.goalieBlock.append(shot) }
+                            if(n == 6 && !self.beatFB.contains(where: { temp in
+                                if(shot.equals(temp: temp)) { return true }
+                                return false }))
+                            { self.beatFB.append(shot) }
+                        }
+                    }
+                    else
+                    {
+                        print("THE ERROR WAS: "+error!.localizedDescription)
+                    }
+                }
+                     
+                }//if end
+                else if(criteria2!.key == "Type") {
+                    
+                    db.collectionGroup(team+"Shots")
+                        .whereField("Result", isEqualTo: n)
+                        .whereField("Phase", isEqualTo: phase)
+                        .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                        .whereField("Type", arrayContains: criteria2!.value).getDocuments { snapshot, error in
+                
+                if snapshot != nil
+                {
+                    for doc in snapshot!.documents {
+                        
+                        let shot = Shot(doc: doc)
+                        
+                        if(n == 1 && !self.goal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goal.append(shot) }
+                        if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.fieldBlock.append(shot) }
+                        if(n == 3 && !self.missGoal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.missGoal.append(shot) }
+                        if(n == 4 && !self.tipOut.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.tipOut.append(shot) }
+                        if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goalieBlock.append(shot) }
+                        if(n == 6 && !self.beatFB.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.beatFB.append(shot) }
+                    }
+                }
+                else
+                {
+                    print("THE ERROR WAS: "+error!.localizedDescription)
+                }
+            }
+                 
+            }//else if end
+            else
+            {
+                db.collectionGroup(team+"Shots")
+                    .whereField("Result", isEqualTo: n)
+                    .whereField("Phase", isEqualTo: phase)
+                    .whereField(criteria1!.key, isEqualTo: criteria1!.value)
+                    .whereField(criteria2!.key, isEqualTo: criteria2!.value).getDocuments { snapshot, error in
+            
+            if snapshot != nil
+            {
+                for doc in snapshot!.documents {
+                    
+                    let shot = Shot(doc: doc)
+                    
+                    if(n == 1 && !self.goal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goal.append(shot) }
+                    if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.fieldBlock.append(shot) }
+                    if(n == 3 && !self.missGoal.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.missGoal.append(shot) }
+                    if(n == 4 && !self.tipOut.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.tipOut.append(shot) }
+                    if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.goalieBlock.append(shot) }
+                    if(n == 6 && !self.beatFB.contains(where: { temp in
+                        if(shot.equals(temp: temp)) { return true }
+                        return false }))
+                    { self.beatFB.append(shot) }
+                }
+            }
+            else
+            {
+                print("THE ERROR WAS: "+error!.localizedDescription)
+            }
+                }//snapshot end
+            }//else end
                     
             }//for end
                 
@@ -437,7 +883,55 @@ struct PlayerResultsTable: View {
             }//criteria2
             
             for n in 1...6 {
-            db.collection("teams").document(team).collection("players").document(String(num)).collection(team+"Shots")
+                
+                if(criteria1!.key == "Type") {
+                
+                db.collectionGroup(team+"Shots")
+                    .whereField("Result", isEqualTo: n)
+                    .whereField("Phase", isEqualTo: phase)
+                    .whereField(criteria1!.key, arrayContains: criteria1!.value).getDocuments { snapshot, error in
+                
+                if snapshot != nil
+                {
+                    for doc in snapshot!.documents {
+                        
+                        let shot = Shot(doc: doc)
+                        
+                        if(n == 1 && !self.goal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goal.append(shot) }
+                        if(n == 2 && !self.fieldBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.fieldBlock.append(shot) }
+                        if(n == 3 && !self.missGoal.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.missGoal.append(shot) }
+                        if(n == 4 && !self.tipOut.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.tipOut.append(shot) }
+                        if(n == 5 && !self.goalieBlock.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.goalieBlock.append(shot) }
+                        if(n == 6 && !self.beatFB.contains(where: { temp in
+                            if(shot.equals(temp: temp)) { return true }
+                            return false }))
+                        { self.beatFB.append(shot) }
+                    }
+                }
+                else
+                {
+                    print("THE ERROR WAS: "+error!.localizedDescription)
+                }
+            }
+            }
+                
+            else {
+                db.collectionGroup(team+"Shots")
                     .whereField("Result", isEqualTo: n)
                     .whereField("Phase", isEqualTo: phase)
                     .whereField(criteria1!.key, isEqualTo: criteria1!.value).getDocuments { snapshot, error in
@@ -479,14 +973,14 @@ struct PlayerResultsTable: View {
                     print("THE ERROR WAS: "+error!.localizedDescription)
                 }
             }
-                
+            }
             }//for end
             
             return
         }//criteria1
         
         for n in 1...6 {
-        db.collection("teams").document(team).collection("players").document(String(num)).collection(team+"Shots")
+        db.collectionGroup(team+"Shots")
             .whereField("Phase", isEqualTo: phase)
             .whereField("Result", isEqualTo: n).getDocuments { snapshot, error in
             

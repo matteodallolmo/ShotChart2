@@ -11,7 +11,7 @@ struct GoalView: View {
     
     var teamname = ""
     var strCapNum = ""
-    var shotType = 0
+    var shotType = [Int]()
     var shotResult = 0
     var phase = 0
     

@@ -389,7 +389,7 @@ func retrieveCriteria() -> Void
     
     for n in 1...11 {
     db.collection("teams").document(team).collection("players").document(String(num)).collection(team+"Shots")
-        .whereField("Type", isEqualTo: n).getDocuments { snapshot, error in
+        .whereField("Type", arrayContains: n).getDocuments { snapshot, error in
         
         if(snapshot != nil && error == nil)
         {

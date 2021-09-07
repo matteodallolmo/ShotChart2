@@ -13,7 +13,7 @@ struct FiveManView: View {
     
     var teamname = ""
     var strCapNum = ""
-    var shotType = 0
+    var shotType = [Int]()
     var shotResult = 0
     var phase = 0
     var location = 0
@@ -170,7 +170,7 @@ struct FiveManView: View {
 
 struct FiveManView_Previews: PreviewProvider {
     static var previews: some View {
-        FiveManView(teamname: "Harvard-Westlake", strCapNum: "3", shotType: 3, shotResult: 4, phase: 1, location: 4)
+        FiveManView(teamname: "Harvard-Westlake", strCapNum: "3", shotType: [3, 2, 1], shotResult: 4, phase: 1, location: 4)
             .previewLayout(.fixed(width: 2532, height: 1170))
     }
 }

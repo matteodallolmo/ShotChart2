@@ -468,47 +468,47 @@ func loadData() -> Void {
     {
         for shot in shotSelection
         {
-            if(shot.type == 1 && !self.direct.contains(where: { temp in
+            if(shot.type.contains(1) && !self.direct.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { direct.append(shot) }
-            if(shot.type == 2 && !self.cas.contains(where: { temp in
+            if(shot.type.contains(2) && !self.cas.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { cas.append(shot) }
-            if(shot.type == 3 && !self.fake.contains(where: { temp in
+            if(shot.type.contains(3) && !self.fake.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { fake.append(shot) }
-            if(shot.type == 4 && !self.drive.contains(where: { temp in
+            if(shot.type.contains(4) && !self.drive.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { drive.append(shot) }
-            if(shot.type == 5 && !self.pickup.contains(where: { temp in
+            if(shot.type.contains(5) && !self.pickup.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { pickup.append(shot) }
-            if(shot.type == 6 && !self.backhand.contains(where: { temp in
+            if(shot.type.contains(6) && !self.backhand.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { backhand.append(shot) }
-            if(shot.type == 7 && !self.quick6v5.contains(where: { temp in
+            if(shot.type.contains(7) && !self.quick6v5.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { quick6v5.append(shot) }
-            if(shot.type == 8 && !self.overpass.contains(where: { temp in
+            if(shot.type.contains(8) && !self.overpass.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { overpass.append(shot) }
-            if(shot.type == 9 && !self.skip.contains(where: { temp in
+            if(shot.type.contains(9) && !self.skip.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { skip.append(shot) }
-            if(shot.type == 10 && !self.lob.contains(where: { temp in
+            if(shot.type.contains(10) && !self.lob.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { lob.append(shot) }
-            if(shot.type == 11 && !self.transition.contains(where: { temp in
+            if(shot.type.contains(11) && !self.transition.contains(where: { temp in
                 if(shot.equals(temp: temp)) { return true }
                 return false }))
             { transition.append(shot) }

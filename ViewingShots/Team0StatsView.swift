@@ -387,7 +387,8 @@ func retrieveCriteria(team: String, criteria: String) -> Void
     if(criteria == "Type") {
     
     for n in 1...11 {
-    db.collectionGroup(team+"Shots").whereField("Type", isEqualTo: n).getDocuments { snapshot, error in
+        
+        db.collectionGroup(team+"Shots").whereField("Type", arrayContains: n).getDocuments { snapshot, error in
         
         if(snapshot != nil && error == nil)
         {

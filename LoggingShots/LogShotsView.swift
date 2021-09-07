@@ -13,12 +13,15 @@ struct LogShotsView: View {
     
     @State private var teamname = ""
     @State private var strCapNum = ""
-    @State private var shotType = 0
+    @State private var shotType = [Int]()
     @State private var shotResult = 0
     @State private var phase = 0
     @State private var isActive = false
     @State private var backButton = false
     @State private var errorMes = ""
+    
+    @State private var shotTypeListArr: [String] = [ "Direct", "Catch & Shoot", "Fake", "Drive", "Pick Up", "Backhand", "Quick 6v5", "Over Pass", "Lob", "Transition" ]
+    @State private var selections: [String] = [];
     
     var body: some View {
 
@@ -39,21 +42,18 @@ VStack {
         }
         
         Section(header: Text("Shot Attributes")) {
-            Picker(selection: $shotType, label: Text("Select Shot Type"), content: {
-                Text("Direct").tag(1)
-                Text("Catch & Shoot").tag(2)
-                Text("Fake").tag(3)
-                Text("Drive").tag(4)
-                Text("Pick Up").tag(5)
-                Text("Backhand").tag(6)
-                Text("Quick 6v5").tag(7)
-                Group {
-                Text("Over Pass").tag(8)
-                Text("Skip").tag(9)
-                Text("Lob").tag(10)
-                Text("Transition").tag(11)
+            List {
+                ForEach(self.shotTypeListArr, id: \.self) { type in
+                    MultipleSelectionRow(title: type, isSelected: self.selections.contains(type)) {
+                        if self.selections.contains(type) {
+                            self.selections.removeAll(where: { $0 == type })
+                        }
+                        else {
+                            self.selections.append(type)
+                        }
+                    }
                 }
-            })
+            }
             
             Picker(selection: $shotResult, label: Text("Select Shot Result"), content: {
                 Text("Goal").tag(1)
@@ -74,6 +74,9 @@ VStack {
         
         Button(action: {
             
+        for item in selections {
+            shotType.append(shotTypeListArr.firstIndex(of: item)!)
+        }
         if(self.validateFields() == nil)
         {
             self.isActive = true
@@ -113,7 +116,7 @@ VStack {
         {
             return "Enter valid cap number"
         }
-        if(shotType == 0)
+        if(shotType == [])
         {
             return "Please fill in all fields"
         }
@@ -125,3 +128,21 @@ VStack {
     }
     
 }//struct end
+
+struct MultipleSelectionRow: View {
+    var title: String
+    var isSelected: Bool
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: self.action) {
+            HStack {
+                Text(self.title)
+                if self.isSelected {
+                    Spacer()
+                    Image(systemName: "checkmark")
+                }
+            }
+        }.foregroundColor(.black)
+    }
+}
